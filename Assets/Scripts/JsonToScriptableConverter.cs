@@ -202,7 +202,7 @@ public class JsonToScriptableConverter : EditorWindow
                     dialogSO.id = rowData.id.Value;
                     dialogSO.characterName = rowData.characterName;
                     dialogSO.text = rowData.text;
-                    dialogSO.nextiId = rowData.nextId.HasValue ? rowData.nextId.Value : -1;
+                    dialogSO.nextId = rowData.nextId.HasValue ? rowData.nextId.Value : -1;
                     dialogSO.portraitPath = rowData.portraitPath;
                     dialogSO.choices = new List<DialogChoiceSO>();
 
