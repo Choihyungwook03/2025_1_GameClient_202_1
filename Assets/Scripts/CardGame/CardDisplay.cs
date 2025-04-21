@@ -13,16 +13,19 @@ public class CardDisplay : MonoBehaviour
     public TextMeshPro attackText;
     public TextMeshPro descriptionText;
 
-    private bool isDragging = false;
+    public bool isDragging = false;
     private Vector3 originalPosition;
 
     public LayerMask enemyLayer;
     public LayerMask playerLayer;
+
+    private CardManager cardManager;
     // Start is called before the first frame update
     void Start()
     {
         playerLayer = LayerMask.GetMask("Player");
         enemyLayer = LayerMask.GetMask("Enemy");
+        cardManager = FindObjectOfType<CardManager>();
         SetupCard(cardData);
     }
 
@@ -58,6 +61,13 @@ public class CardDisplay : MonoBehaviour
     }
     private void OnMouseUp()
     {
+        CaracterStats playerStats = FindObjectOfType<CaracterStats>();
+        if (playerStats == null || playerStats.currentMana < cardData.manaCost)
+        {
+            Debug.Log($"마나가 부족합니다! (필요 : {cardData.manaCost}, 현재 : {playerStats?.currentMana ?? 0}");
+            transform.position = originalPosition;
+            return;
+        }
         isDragging = false;
 
         RaycastHit hit;
@@ -69,7 +79,7 @@ public class CardDisplay : MonoBehaviour
         {
             CaracterStats enemyStats = hit.collider.GetComponent<CaracterStats>();
 
-            if(cardData.cardType == CardData.CardType.Attack)
+            if (cardData.cardType == CardData.CardType.Attack)
             {
                 enemyStats.TakeDamage(cardData.effectAmount);
                 Debug.Log($"{cardData.cardName} 카드로 적에게 {cardData.effectAmount} 데미지를 입혔습니다.");
@@ -80,11 +90,11 @@ public class CardDisplay : MonoBehaviour
                 Debug.Log("이 카드는 적에게 사용할 수 없습니다.");
             }
         }
-        else if(Physics.Raycast(ray, out hit, Mathf.Infinity,playerLayer))
+        else if (Physics.Raycast(ray, out hit, Mathf.Infinity, playerLayer))
         {
-            CaracterStats playerStats = hit.collider.GetComponent<CaracterStats>();
+            //CaracterStats playerStats = hit.collider.GetComponent<CaracterStats>();
 
-            if(playerStats != null)
+            if (playerStats != null)
             {
                 if (cardData.cardType == CardData.CardType.Heal)
                 {
@@ -97,14 +107,30 @@ public class CardDisplay : MonoBehaviour
                     Debug.Log("이 카드는 플레이어에게 사용할 수 없습니다.");
                 }
             }
+            
         }
-        if(!cardUsed)
+        else if (cardManager != null)
+        {
+            float distToDiscard = Vector3.Distance(transform.position, cardManager.discardPosition.position);
+            if (distToDiscard < 2.0f)
+            {
+                cardManager.DiscardCard(cardIndex);
+                return;
+            }
+            
+        }
+        if (!cardUsed)
         {
             transform.position = originalPosition;
+            cardManager.ArrangeHand();
         }
         else
         {
-            Destroy(gameObject);
+            if (cardManager != null)
+                cardManager.DiscardCard(cardIndex);
+
+            playerStats.UseMana(cardData.manaCost);
+            Debug.Log($"마나를 {cardData.manaCost} 사용 했습니다. (남은 마나 : {playerStats.currentMana})");
         }
     }
 }
