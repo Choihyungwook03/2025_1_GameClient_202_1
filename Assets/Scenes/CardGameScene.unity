@@ -624,7 +624,7 @@ GameObject:
   - component: {fileID: 850764811}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -772,14 +772,18 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5a9238db3063be048b2dfb1f58543ed6, type: 2}
   - {fileID: 11400000, guid: 09bf4f47043540a47a911cd75108b0bb, type: 2}
   - {fileID: 11400000, guid: 106169a573ea6ce4e8a83ad51f451f3a, type: 2}
+  - {fileID: 11400000, guid: 472954b578ca10f4a8ea1b5e35ddf336, type: 2}
+  - {fileID: 11400000, guid: 952340d4d4aa1d0428c9e67b838a1c5a, type: 2}
+  - {fileID: 11400000, guid: 8fd9c79454ef0a144a8d1a81392be575, type: 2}
+  - {fileID: 11400000, guid: 99c0831b823d60643a883f89ed69e1d8, type: 2}
   - {fileID: 11400000, guid: 9aa8cf41d43c189468197101ca9a38c8, type: 2}
   - {fileID: 11400000, guid: 5a9238db3063be048b2dfb1f58543ed6, type: 2}
   - {fileID: 11400000, guid: 09bf4f47043540a47a911cd75108b0bb, type: 2}
   - {fileID: 11400000, guid: 106169a573ea6ce4e8a83ad51f451f3a, type: 2}
-  - {fileID: 11400000, guid: 9aa8cf41d43c189468197101ca9a38c8, type: 2}
-  - {fileID: 11400000, guid: 5a9238db3063be048b2dfb1f58543ed6, type: 2}
-  - {fileID: 11400000, guid: 09bf4f47043540a47a911cd75108b0bb, type: 2}
-  - {fileID: 11400000, guid: 106169a573ea6ce4e8a83ad51f451f3a, type: 2}
+  - {fileID: 11400000, guid: 472954b578ca10f4a8ea1b5e35ddf336, type: 2}
+  - {fileID: 11400000, guid: 952340d4d4aa1d0428c9e67b838a1c5a, type: 2}
+  - {fileID: 11400000, guid: 8fd9c79454ef0a144a8d1a81392be575, type: 2}
+  - {fileID: 11400000, guid: 99c0831b823d60643a883f89ed69e1d8, type: 2}
   handCards: []
   discardCards: []
   cardPrefab: {fileID: 4096808658855402299, guid: 441a2d9fe26ce554aadf722fcb0114ec,
