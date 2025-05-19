@@ -73,7 +73,7 @@ public class CardDisplay : MonoBehaviour
         {
             float distToDiscard = Vector3.Distance(transform.position, cardManager.discardPosition.position);
 
-            if (distToDiscard > 2.0)
+            if (distToDiscard < 2.0)
             {
                 cardManager.DiscardCard(cardIndex);
                 return;
